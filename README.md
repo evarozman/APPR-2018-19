@@ -5,10 +5,24 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2018/19
 * [![Shiny](http://mybinder.org/badge.svg)](http://beta.mybinder.org/v2/gh/jaanos/APPR-2018-19/master?urlpath=shiny/APPR-2018-19/projekt.Rmd) Shiny
 * [![RStudio](http://mybinder.org/badge.svg)](http://beta.mybinder.org/v2/gh/jaanos/APPR-2018-19/master?urlpath=rstudio) RStudio
 
-## Tematika
+## Analiza zdravstva v Evropi
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal.
-Tukaj boste napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+V projektu bom analizirala zdravstvo držav Evropske unije. V prvi tabeli bom naredila analizo zdravstvenega stanja prebivalstva v posameznih državah glede na starost in spol, v drugi tabeli pa analizo učinkovitosti zdravstva. Podatke bom zbirala glede na leto 2014.
+Na koncu bom zbrane podatke primerjala še z razvitostjo držav ter poskušala najti povezavo med razvitostjo, zdravjem in učinkovitostjo zdravstva.
+
+TABELA 1:
+* Pričakovana življenjska doba (v letih)
+* Bolniška odsotnost od dela (v odstotkih)
+* Psihološke bolezni (v odstotkih)
+* Umrljivost otrok do 1 leta (število)
+TABELA 2:
+* Proračun (EUR na prebivalca)
+* Število mest v zdravstvenih ustanovah (mest na 100.000 prebivalcev)
+* Število zdravstvenih delavcev (delavcev na 1.000 prebivalcev)
+* Oskrba na domu (v odstotkih)
+
+Viri: Eurostat (https://ec.europa.eu/eurostat/data/database), Wikipedija (https://en.wikipedia.org/wiki/List_of_sovereign_states_in_Europe_by_GDP_(nominal), https://en.wikipedia.org/wiki/List_of_sovereign_states_in_Europe_by_Human_Development_Index)
+
 
 ## Program
 
