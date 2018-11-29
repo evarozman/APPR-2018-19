@@ -15,6 +15,7 @@ TABELA 1:
 * Bolniška odsotnost od dela (v odstotkih)
 * Psihološke bolezni (v odstotkih)
 * Umrljivost otrok do 1 leta (število)
+
 TABELA 2:
 * Proračun (EUR na prebivalca)
 * Število mest v zdravstvenih ustanovah (mest na 100.000 prebivalcev)
