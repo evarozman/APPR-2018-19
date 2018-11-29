@@ -8,6 +8,7 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2018/19
 ## Analiza zdravstva v Evropi
 
 V projektu bom analizirala zdravstvo držav Evropske unije. V prvi tabeli bom naredila analizo zdravstvenega stanja prebivalstva v posameznih državah glede na starost in spol, v drugi tabeli pa analizo učinkovitosti zdravstva. Podatke bom zbirala glede na leto 2014.
+
 Na koncu bom zbrane podatke primerjala še z razvitostjo držav ter poskušala najti povezavo med razvitostjo, zdravjem in učinkovitostjo zdravstva.
 
 TABELA 1:
