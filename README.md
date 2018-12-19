@@ -17,7 +17,7 @@ Tretje področje je razvitost države. Tukaj bom raziskala gospodarsko rast, s p
 
 Moj cilj je poiskati povezave med trenutnim zdravstvenim stanjem posamezne države, vlaganjem v zdravstvo in razvitosjo oziroma razvojem države.
 
-Za vir podatkov bom uporabila Eurostat (https://ec.europa.eu/eurostat/data/database), Wikipedijo (https://sl.wikipedia.org/wiki/Pri%C4%8Dakovana_%C5%BEivljenjska_doba) in World Bank (http://databank.worldbank.org/data/source/world-development-indicators).
+Za vir podatkov bom uporabila Eurostat (https://ec.europa.eu/eurostat/data/database), OECD.Stat (https://stats.oecd.org/index.aspx?queryid=30123#) in World Bank (http://databank.worldbank.org/data/source/world-development-indicators).
 
 TABELE:
 1. tabela (zdravstveno stanje): 
