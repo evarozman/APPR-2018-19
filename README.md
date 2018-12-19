@@ -2,29 +2,44 @@
 
 Repozitorij z gradivi pri predmetu APPR v študijskem letu 2018/19
 
-* [![Shiny](http://mybinder.org/badge.svg)](http://beta.mybinder.org/v2/gh/jaanos/APPR-2018-19/master?urlpath=shiny/APPR-2018-19/projekt.Rmd) Shiny
-* [![RStudio](http://mybinder.org/badge.svg)](http://beta.mybinder.org/v2/gh/jaanos/APPR-2018-19/master?urlpath=rstudio) RStudio
+* [![Shiny](http://mybinder.org/badge.svg)](http://beta.mybinder.org/v2/gh/evarozman/APPR-2018-19/master?urlpath=shiny/APPR-2018-19/projekt.Rmd) Shiny
+* [![RStudio](http://mybinder.org/badge.svg)](http://beta.mybinder.org/v2/gh/evarozman/APPR-2018-19/master?urlpath=rstudio) RStudio
 
 ## Analiza zdravstva v Evropi
 
-V projektu bom analizirala zdravstvo držav Evropske unije. V prvi tabeli bom naredila analizo zdravstvenega stanja prebivalstva v posameznih državah glede na starost in spol, v drugi tabeli pa analizo učinkovitosti zdravstva. Podatke bom zbirala glede na leto 2014.
+V projektu bom analizirala glavne kazalce zdravstvenega stanja držav Evropske unije.
 
-Na koncu bom zbrane podatke primerjala še z razvitostjo držav ter poskušala najti povezavo med razvitostjo, zdravjem in učinkovitostjo zdravstva.
+Prvo področje bo splošno zdravstveno stanje leta 2014, kjer se bom osredotočila na podatke o pričakovani življenjski dobi, bolniški odsotnosti z dela, ljudi s psihološkimi boleznimi in umrljivost otrok do enega leta starosti.
 
-TABELA 1:
-* Pričakovana življenjska doba (v letih)
-* Bolniška odsotnost od dela (v odstotkih)
-* Psihološke bolezni (v odstotkih)
-* Umrljivost otrok do 1 leta (število)
+Drugo področje je zdravstvo kot institucija, kjer bom vključila podatke o proračunu, ki je namenjen za zdravstvo na prebivalca, število mest v zdravstvenih ustanovah in število zdravstevih delavcev glede na število prebivalcev in pa koliko ljudi in pa v kolikšni meri potrebuje oskrbo na domu.
 
-TABELA 2:
-* Proračun (EUR na prebivalca)
-* Število mest v zdravstvenih ustanovah (mest na 100.000 prebivalcev)
-* Število zdravstvenih delavcev (delavcev na 1.000 prebivalcev)
-* Oskrba na domu (v odstotkih)
+Tretje področje je razvitost države. Tukaj bom raziskala gospodarsko rast, s poudarkom na rasti bruto domačega proizvoda na prebivalca, na dohodek in brezposelnost.
 
-Viri: Eurostat (https://ec.europa.eu/eurostat/data/database), Wikipedija (https://en.wikipedia.org/wiki/List_of_sovereign_states_in_Europe_by_GDP_(nominal), https://en.wikipedia.org/wiki/List_of_sovereign_states_in_Europe_by_Human_Development_Index)
+Moj cilj je poiskati povezave med trenutnim zdravstvenim stanjem posamezne države, vlaganjem v zdravstvo in razvitosjo oziroma razvojem države.
 
+Za vir podatkov bom uporabila Eurostat (https://ec.europa.eu/eurostat/data/database), Wikipedijo (https://sl.wikipedia.org/wiki/Pri%C4%8Dakovana_%C5%BEivljenjska_doba) in World Bank (http://databank.worldbank.org/data/source/world-development-indicators).
+
+TABELE:
+1. tabela (zdravstveno stanje): 
+	* država
+	* spol
+	* pričakovana življenjska doba
+	* število zdravih let
+	* bolniška odsotnost od dela
+	* umrljivost otrok do 1 leta starosti
+
+2. tabela (zdravstvo):
+	* država
+	* proračun na prebivalca
+	* število mest v zdravstvenih ustanovah (na 100.000 prebivalcev)
+	* število zdravstvenih delavcev (na 1.000 prebivalcev)
+	* število ljudi z oskrbo na domu
+
+3. tabela (razvitost):
+	* država
+	* BDP
+	* dohodek
+	* brezposelnost
 
 ## Program
 
