@@ -1,54 +1,44 @@
-# 2. faza: Uvoz podatkov
+library(readr)
+library(reshape2)
+library(dplyr)
 
-sl <- locale("sl", decimal_mark=",", grouping_mark=".")
+zivljenska_doba <- read_csv("podatki/zivlj_doba.csv", na=c(":", " : "), locale=locale(encoding="Windows-1250"))
+zivljenska_doba <- zivljenska_doba[, -c(3, 5)]
 
-# Funkcija, ki uvozi občine iz Wikipedije
-uvozi.obcine <- function() {
-  link <- "http://sl.wikipedia.org/wiki/Seznam_ob%C4%8Din_v_Sloveniji"
-  stran <- html_session(link) %>% read_html()
-  tabela <- stran %>% html_nodes(xpath="//table[@class='wikitable sortable']") %>%
-    .[[1]] %>% html_table(dec=",")
-  for (i in 1:ncol(tabela)) {
-    if (is.character(tabela[[i]])) {
-      Encoding(tabela[[i]]) <- "UTF-8"
-    }
-  }
-  colnames(tabela) <- c("obcina", "povrsina", "prebivalci", "gostota", "naselja",
-                        "ustanovitev", "pokrajina", "regija", "odcepitev")
-  tabela$obcina <- gsub("Slovenskih", "Slov.", tabela$obcina)
-  tabela$obcina[tabela$obcina == "Kanal ob Soči"] <- "Kanal"
-  tabela$obcina[tabela$obcina == "Loški potok"] <- "Loški Potok"
-  for (col in c("povrsina", "prebivalci", "gostota", "naselja", "ustanovitev")) {
-    tabela[[col]] <- parse_number(tabela[[col]], na="-", locale=sl)
-  }
-  for (col in c("obcina", "pokrajina", "regija")) {
-    tabela[[col]] <- factor(tabela[[col]])
-  }
-  return(tabela)
-}
+moski_zdrava_leta <- filter(zivljenska_doba, INDIC_HE == "Healthy life years in absolute value at birth - males")
+moski_zdrava_leta["SPOL"] <- "m"
+moski_zdrava_leta <- moski_zdrava_leta[, -c(1)]
+names(moski_zdrava_leta) <- (c("DRŽAVA", "ZDRAVA LETA", "SPOL"))
 
-# Funkcija, ki uvozi podatke iz datoteke druzine.csv
-uvozi.druzine <- function(obcine) {
-  data <- read_csv2("podatki/druzine.csv", col_names=c("obcina", 1:4),
-                    locale=locale(encoding="Windows-1250"))
-  data$obcina <- data$obcina %>% strapplyc("^([^/]*)") %>% unlist() %>%
-    strapplyc("([^ ]+)") %>% sapply(paste, collapse=" ") %>% unlist()
-  data$obcina[data$obcina == "Sveti Jurij"] <- "Sveti Jurij ob Ščavnici"
-  data <- data %>% melt(id.vars="obcina", variable.name="velikost.druzine",
-                        value.name="stevilo.druzin")
-  data$velikost.druzine <- parse_number(data$velikost.druzine)
-  data$obcina <- factor(data$obcina, levels=obcine)
-  return(data)
-}
+zenske_zdrava_leta <- filter(zivljenska_doba, INDIC_HE == "Healthy life years in absolute value at birth - females")
+zenske_zdrava_leta["SPOL"] <- "f"
+zenske_zdrava_leta <- zenske_zdrava_leta[, -c(1)]
+names(zenske_zdrava_leta) <- (c("DRŽAVA", "ZDRAVA LETA", "SPOL"))
 
-# Zapišimo podatke v razpredelnico obcine
-obcine <- uvozi.obcine()
+moski_zivlj_doba <- filter(zivljenska_doba, INDIC_HE == "Life expectancy in absolute value at birth - males")
+moski_zivlj_doba["SPOL"] <- "m"
+moski_zivlj_doba <- moski_zivlj_doba[, -c(1)]
+names(moski_zivlj_doba) <- (c("DRŽAVA", "ŽIVLJENSKA DOBA", "SPOL"))
 
-# Zapišimo podatke v razpredelnico druzine.
-druzine <- uvozi.druzine(levels(obcine$obcina))
+zenske_zivlj_doba <- filter(zivljenska_doba, INDIC_HE == "Life expectancy in absolute value at birth - females")
+zenske_zivlj_doba["SPOL"] <- "f"
+zenske_zivlj_doba <- zenske_zivlj_doba[, -c(1)]
+names(zenske_zivlj_doba) <- (c("DRŽAVA", "ŽIVLJENSKA DOBA", "SPOL"))
 
-# Če bi imeli več funkcij za uvoz in nekaterih npr. še ne bi
-# potrebovali v 3. fazi, bi bilo smiselno funkcije dati v svojo
-# datoteko, tukaj pa bi klicali tiste, ki jih potrebujemo v
-# 2. fazi. Seveda bi morali ustrezno datoteko uvoziti v prihodnjih
-# fazah.
+zdrava_leta <- rbind(moski_zdrava_leta, zenske_zdrava_leta)
+zivlj_doba <- rbind(moski_zivlj_doba, zenske_zivlj_doba)
+zdravstveno_stanje <- inner_join(zdrava_leta, zivlj_doba, by=c("DRŽAVA", "SPOL"))
+
+bolniska <- read_csv("podatki/bolniska.csv", na=c(":", " : "), locale=locale(encoding="Windows-1250"))
+bolniska <- bolniska[, -c(1, 2, 3, 4, 5, 7, 8, 10, 11)]
+bolniska["SPOL"] <- NA
+names(bolniska) <- (c("DRŽAVA", "BOLNIŠKA", "SPOL"))
+
+st_prebivalcev <- read_csv("podatki/st_prebiv.csv", na=c(":", " : "), locale=locale(encoding="Windows-1250"))
+st_prebivalcev <- st_prebivalcev[, -c(1, 3, 5)]
+names(st_prebivalcev) <- (c("DRŽAVA", "STEVILO PREBIVALCEV"))
+
+umrljivost_otrok <- read_csv("podatki/umrljivost_otrok.csv", na=c(":", " : "), locale=locale(encoding="Windows-1250"))
+umrljivost_otrok <- umrljivost_otrok[, -c(3, 4, 5, 6, 7, 9)]
+names(umrljivost_otrok) <- (c("SPOL", "DRŽAVA", "ŠTEVILO SMRTI OTROK"))
+
