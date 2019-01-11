@@ -4,7 +4,7 @@ library(dplyr)
 
 
 
-## 1. TABELA
+### 1. TABELA
 
 zivljenska_doba <- read_csv("podatki/zivlj_doba.csv", na=c(":", " : "), locale=locale(encoding="Windows-1250"))
 zivljenska_doba <- zivljenska_doba[, -c(3, 5)]
@@ -57,7 +57,7 @@ zdravstveno_stanje <- inner_join(zdravstveno_stanje, umrljivost_otrok_na_100000,
 
 
 
-## 2. TABELA
+### 2. TABELA
 
 proracun <- read_csv("podatki/izdatki.csv", na=c(":", " : "), locale=locale(encoding="Windows-1250"))
 proracun <- proracun[, -c(3, 4, 6)]
@@ -106,7 +106,7 @@ names(st_stud_zdravstva) <- (c("LETO", "DRŽAVA", "ŠTEVILO ŠTUDENTOV ZDRAVSTVA
 zdravstvo <- inner_join(zdravstvo, st_stud_zdravstva, by=c("LETO", "DRŽAVA"))
 
 
-## 3. TABELA
+### 3. TABELA
 
 BDP <- read_csv("podatki/BDP.csv", na=c(":", " : "), locale=locale(encoding="Windows-1250"))
 BDP <- BDP[, -c(3, 4, 6)]
