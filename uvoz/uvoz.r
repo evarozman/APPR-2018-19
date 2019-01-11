@@ -34,22 +34,26 @@ zivlj_doba <- rbind(moski_zivlj_doba, zenske_zivlj_doba)
 
 zdravstveno_stanje <- inner_join(zdrava_leta, zivlj_doba, by=c("DRŽAVA", "SPOL"))
 
-bolniska <- read_csv("podatki/bolniska.csv", na=c(":", " : "), locale=locale(encoding="Windows-1250"))
-bolniska <- bolniska[, -c(1, 2, 3, 4, 5, 7, 8, 10, 11)]
-bolniska["SPOL"] <- NA
-names(bolniska) <- (c("DRŽAVA", "BOLNIŠKA", "SPOL"))
-
-#zdravstveno_stanje <- inner_join(zdravstveno_stanje, bolniska, by=c("DRŽAVA", "SPOL"))
-
 st_prebivalcev <- read_csv("podatki/st_prebiv.csv", na=c(":", " : "), locale=locale(encoding="Windows-1250"))
 st_prebivalcev <- st_prebivalcev[, -c(1, 3, 5)]
-names(st_prebivalcev) <- (c("DRŽAVA", "STEVILO PREBIVALCEV"))
+names(st_prebivalcev) <- (c("DRŽAVA", "ŠTEVILO PREBIVALCEV"))
 
 umrljivost_otrok <- read_csv("podatki/umrljivost_otrok.csv", na=c(":", " : "), locale=locale(encoding="Windows-1250"))
 umrljivost_otrok <- umrljivost_otrok[, -c(3, 4, 5, 6, 7, 9)]
+umrljivost_otrok <- umrljivost_otrok[-c(2, 35),]
+
 names(umrljivost_otrok) <- (c("SPOL", "DRŽAVA", "ŠTEVILO SMRTI OTROK"))
 
-#zdravstveno_stanje <- inner_join(zdravstveno_stanje, umrljivost_otrok, by=c("DRŽAVA", "SPOL"))
+umrljivost_otrok_na_100000 <- inner_join(st_prebivalcev, umrljivost_otrok, by="DRŽAVA")
+umrljivost_otrok_na_100000["ŠTEVILO SMRTI OTROK NA 100.000 PREBIVALCEV"] <- umrljivost_otrok_na_100000["ŠTEVILO SMRTI OTROK"] * 
+  100000 / umrljivost_otrok_na_100000["ŠTEVILO PREBIVALCEV"]
+
+umrljivost_otrok_na_100000$SPOL[umrljivost_otrok_na_100000$SPOL == "Males"] <- "m"
+umrljivost_otrok_na_100000$SPOL[umrljivost_otrok_na_100000$SPOL == "Females"] <- "f"
+
+umrljivost_otrok_na_100000 <- umrljivost_otrok_na_100000[, -c(2, 4)]
+
+zdravstveno_stanje <- inner_join(zdravstveno_stanje, umrljivost_otrok_na_100000, by=c("DRŽAVA", "SPOL"))
 
 
 
@@ -119,3 +123,4 @@ brezposelnost <- brezposelnost[, -c(3, 4, 5, 7)]
 names(brezposelnost) <- (c("LETO", "DRŽAVA", "ŠTEVILO BREZPOSELNIH"))
 
 razvitost <- inner_join(razvitost, brezposelnost, by=c("LETO", "DRŽAVA"))
+
