@@ -39,20 +39,20 @@ Podatke sem uvozila v obliki CSV z Eurostata. Podatke imamo v treh razpredelnica
 1. `zdravstveno_stanje` - podatki o zdravstvenem stanju iz leta 2014 za države Evrope
   - `DRZAVA` - spremenljivka: ime države (neurejen faktor),
   - `SPOL` - spremenljivka: spol osebe (neurejen faktor),
-  - `ZIVLJENJSKA DOBA` - meritev: pričakovana življenjska doba osebe ob rojstvu (število)
-  - `ZDRAVA LETA` - meritev: pričakovano število zdravih let ob rojstvu (število)
-  - `SMRT OTROK` - meritev: število umrlih otrok do prvega leta starosti na 100.000 prebivalcev (število)
+  - `ZIVLJENJSKA_DOBA` - meritev: pričakovana življenjska doba osebe ob rojstvu (število)
+  - `ZDRAVA_LETA` - meritev: pričakovano število zdravih let ob rojstvu (število)
+  - `SMRT_OTROK` - meritev: število umrlih otrok do prvega leta starosti na 100.000 prebivalcev (število)
 
 2. `zdravstvo` - podatki o zdravstvu za države Evrope
   - `DRZAVA` - spremenljivka: ime države (neurejen faktor),
   - `LETO` - spremenljivka: leto, v katerem je bila meritev izvedena (število),
   - `PRORACUN` - meritev: letni proračun v evrih na prebivalca (število),
   - `POSTELJE` - meritev: število bolniških postelj na 100.000 prebivalcev (število),
-  - `OPERACIJSKE SOBE` - meritev: število operacijskih sob na 100.000 prebivalcev (število),
+  - `OPERACIJSKE_SOBE` - meritev: število operacijskih sob na 100.000 prebivalcev (število),
   - `ZDRAVNIKI` - meritev: število zdravnikov na 100.000 prebivalcev (število),
-  - `ZDRAVSTVENI TEHNIKI` - meritev: število zdravstvenih tehnikov na 100.000 prebivalcev (število),
-  - `STUDENTI MEDICINE` - meritev: število študentov medicine na 100.000 prebivalcev (število),
-  - `STUDENTI ZDRAVSTVA` - meritev: število študentov zdravstva na 100.000 prebivalcev (besedilo).
+  - `ZDRAVSTVENI_TEHNIKI` - meritev: število zdravstvenih tehnikov na 100.000 prebivalcev (število),
+  - `STUDENTI_MEDICINE` - meritev: število študentov medicine na 100.000 prebivalcev (število),
+  - `STUDENTI_ZDRAVSTVA` - meritev: število študentov zdravstva na 100.000 prebivalcev (besedilo).
   
 1. `zdravstveno_stanje` - podatki o zdravstvenem stanju iz leta 2014 za države Evrope
   - `DRZAVA` - spremenljivka: ime države (neurejen faktor),
