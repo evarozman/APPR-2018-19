@@ -23,10 +23,21 @@ graf_osebja <- ggplot(data=skupaj.zdravniki, mapping=aes(x=ZDRAVNIKI, y=ZIVLJENJ
 
 print(graf_osebja)
 
-### graf gibanja števila študentov v letih 2000-2017
+### graf gibanja števila študentov v letih 2000-2017 v državah z največ in najmanj zdravniki
 
-graf_studentov <- ggplot(data=zdravstvo, mapping=aes(x=LETO, y=STUDENTI_MEDICINE)) +
-  geom_line() + xlab("leto") + ylab("število študentov medicine (na 100.000 preb.)")
+najvec.zdravnikov <- zdravstvo %>% filter(LETO==2016) %>% filter(STUDENTI_MEDICINE!=0) %>% top_n(3, ZDRAVNIKI)
+najvec.zdravnikov <- c(najvec.zdravnikov$DRZAVA)
+
+najmanj.zdravnikov <- zdravstvo %>% filter(LETO==2016) %>% filter(STUDENTI_MEDICINE!=0) %>% top_n(3, (-1)*ZDRAVNIKI)
+najmanj.zdravnikov <- c(najmanj.zdravnikov$DRZAVA)
+
+najvec.zdravnikov.tabela <- zdravstvo[c("DRZAVA", "LETO", "STUDENTI_MEDICINE")] %>% filter(DRZAVA %in% najvec.zdravnikov)
+najmanj.zdravnikov.tabela <- zdravstvo[c("DRZAVA", "LETO", "STUDENTI_MEDICINE")] %>% filter(DRZAVA %in% najmanj.zdravnikov)
+
+graf_studentov <- ggplot() +
+  geom_line(data=najvec.zdravnikov.tabela, mapping=aes(group=DRZAVA, x=LETO, y=STUDENTI_MEDICINE, color="red")) +
+  geom_line(data=najmanj.zdravnikov.tabela, mapping=aes(group=DRZAVA, x=LETO, y=STUDENTI_MEDICINE, color="green")) +
+  xlab("leto") + ylab("število študentov medicine (na 100.000 preb.)")
 
 print(graf_studentov)
 
@@ -57,8 +68,8 @@ najvisji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZ
 najnizji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZAVA %in% najnizji.bdp)
 
 graf_proracuna <- ggplot() +
-  geom_line(data=najvisji.bdp.tabela, mapping=aes(x=LETO, y=PRORACUN, color="red")) +
-  geom_line(data=najnizji.bdp.tabela, mapping=aes(x=LETO, y=PRORACUN, color="green")) +
+  geom_line(data=najvisji.bdp.tabela, mapping=aes(group=DRZAVA, x=LETO, y=PRORACUN, color="red")) +
+  geom_line(data=najnizji.bdp.tabela, mapping=aes(group=DRZAVA, x=LETO, y=PRORACUN, color="green")) +
   xlab("leto") + ylab("letni proračun (€/preb.)")
 
 print(graf_proracuna)
