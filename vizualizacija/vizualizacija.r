@@ -37,7 +37,7 @@ najmanj.zdravnikov.tabela <- zdravstvo[c("DRZAVA", "LETO", "STUDENTI_MEDICINE")]
 graf_studentov <- ggplot() +
   geom_line(data=najvec.zdravnikov.tabela, mapping=aes(group=DRZAVA, x=LETO, y=STUDENTI_MEDICINE, color="red")) +
   geom_line(data=najmanj.zdravnikov.tabela, mapping=aes(group=DRZAVA, x=LETO, y=STUDENTI_MEDICINE, color="green")) +
-  xlab("leto") + ylab("število študentov medicine (na 100.000 preb.)")
+  xlab("leto") + ylab("število študentov medicine (na 100.000 preb.)") + theme(legend.position="none")
 
 #print(graf_studentov)
 
@@ -54,7 +54,7 @@ graf_umrljivosti <- ggplot(data=skupaj.umrljivost, mapping=aes(x=PRORACUN, y=SMR
 
 #print(graf_umrljivosti)
 
-### gibanje proračuna za zdravstvo v obdobju 2000-2016 za države z najvišjim in najnižjim BDP-jem
+### gibanje proračuna za zdravstvo v obdobju 2010-2016 za države z najvišjim in najnižjim BDP-jem
 
 skupaj <- inner_join(zdravstvo, razvitost, by=c("DRZAVA", "LETO"))
 
@@ -64,15 +64,15 @@ najvisji.bdp <- c(najvisji.bdp$DRZAVA)
 najnizji.bdp <- skupaj %>% filter(LETO==2016) %>% top_n(3, (-1)*BDP)
 najnizji.bdp <- c(najnizji.bdp$DRZAVA)
 
-najvisji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZAVA %in% najvisji.bdp)
-najnizji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZAVA %in% najnizji.bdp)
+najvisji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZAVA %in% najvisji.bdp) %>% filter(LETO>=2010)
+najnizji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZAVA %in% najnizji.bdp) %>% filter(LETO>=2010)
 
 graf_proracuna <- ggplot() +
   geom_line(data=najvisji.bdp.tabela, mapping=aes(group=DRZAVA, x=LETO, y=PRORACUN, color="red")) +
   geom_line(data=najnizji.bdp.tabela, mapping=aes(group=DRZAVA, x=LETO, y=PRORACUN, color="green")) +
-  xlab("leto") + ylab("letni proračun (€/preb.)")
+  xlab("leto") + ylab("letni proračun (€/preb.)") + theme(legend.position="none")
 
-#print(graf_proracuna)
+print(graf_proracuna)
 
 
 # zemljevid
