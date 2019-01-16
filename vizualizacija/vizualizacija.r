@@ -49,10 +49,11 @@ skupaj <- inner_join(zdravstvo, razvitost, by=c("DRZAVA", "LETO"))
 
 najvisji.bdp <- skupaj %>% filter(LETO==2016) %>% top_n(3, BDP)
 najvisji.bdp <- c(najvisji.bdp$DRZAVA)
-najvisji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZAVA %in% najvisji.bdp)
 
 najnizji.bdp <- skupaj %>% filter(LETO==2016) %>% top_n(3, (-1)*BDP)
 najnizji.bdp <- c(najnizji.bdp$DRZAVA)
+
+najvisji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZAVA %in% najvisji.bdp)
 najnizji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZAVA %in% najnizji.bdp)
 
 graf_proracuna <- ggplot() +
