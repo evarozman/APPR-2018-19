@@ -66,7 +66,23 @@ Podatke sem uvozila v obliki CSV z Eurostata. Podatke imamo v treh razpredelnica
 # Analiza in vizualizacija podatkov
 
 ```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
-# source("vizualizacija/vizualizacija.r", encoding="UTF-8")
+source("vizualizacija/vizualizacija.r", encoding="UTF-8")
+```
+
+```{r graf_osebja, echo=FALSE, message=FALSE, warning=FALSE}
+graf_osebja
+```
+
+```{r graf_studentov, echo=FALSE, message=FALSE, warning=FALSE}
+graf_studentov
+```
+
+```{r graf_umrljivosti, echo=FALSE, message=FALSE, warning=FALSE}
+graf_umrljivosti
+```
+
+```{r graf_proracuna, echo=FALSE, message=FALSE, warning=FALSE}
+graf_proracuna
 ```
 
 ***
