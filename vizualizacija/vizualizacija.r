@@ -23,18 +23,9 @@ graf_osebja <- ggplot(data=skupaj.zdravniki, mapping=aes(x=ZDRAVNIKI, y=ZIVLJENJ
 
 print(graf_osebja)
 
-### graf števila študentov v državah z visokim in nizkim BDP-jem
+### graf gibanja števila študentov v letih 2000-2017
 
-najvisji.bdp <- razvitost %>% filter(LETO==2017) %>% top_n(3, BDP)
-najvisji.bdp <- najvisji.bdp ["DRZAVA"]
-
-najnizji.bdp <- razvitost %>% filter(LETO==2017) %>% top_n(3, (-1)*BDP)
-najnizji.bdp <- najnizji.bdp["DRZAVA"]
-
-skupaj.bdp <- rbind(najvisji.bdp, najnizji.bdp)
-drzave.bdp <- zdravstvo %>% filter(zdravstvo$DRZAVA %in% skupaj.bdp)
-                     
-graf_studentov <- ggplot(data=drzave.bdp, mapping=aes(x=LETO, y=STUDENTI_MEDICINE, color=DRZAVA)) +
+graf_studentov <- ggplot(data=zdravstvo, mapping=aes(x=LETO, y=STUDENTI_MEDICINE)) +
   geom_line() + xlab("leto") + ylab("število študentov medicine (na 100.000 preb.)")
 
 print(graf_studentov)
@@ -52,10 +43,22 @@ graf_umrljivosti <- ggplot(data=skupaj.umrljivost, mapping=aes(x=PRORACUN, y=SMR
 
 print(graf_umrljivosti)
 
-### gibanje proračuna za zdravstvo v obdobju 2000-2017
+### gibanje proračuna za zdravstvo v obdobju 2000-2016 za države z najvišjim in najnižjim BDP-jem
 
-graf_proracuna <- ggplot(data=zdravstvo, mapping=aes(x=LETO, y=PRORACUN, color=DRZAVA)) +
-  geom_line() + xlab("leto") + ylab("letni proračun (€/preb.)")
+skupaj <- inner_join(zdravstvo, razvitost, by=c("DRZAVA", "LETO"))
+
+najvisji.bdp <- skupaj %>% filter(LETO==2016) %>% top_n(3, BDP)
+najvisji.bdp <- c(najvisji.bdp$DRZAVA)
+najvisji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZAVA %in% najvisji.bdp)
+
+najnizji.bdp <- skupaj %>% filter(LETO==2016) %>% top_n(3, (-1)*BDP)
+najnizji.bdp <- c(najnizji.bdp$DRZAVA)
+najnizji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZAVA %in% najnizji.bdp)
+
+graf_proracuna <- ggplot() +
+  geom_line(data=najvisji.bdp.tabela, mapping=aes(x=LETO, y=PRORACUN, color="red")) +
+  geom_line(data=najnizji.bdp.tabela, mapping=aes(x=LETO, y=PRORACUN, color="green")) +
+  xlab("leto") + ylab("letni proračun (€/preb.)")
 
 print(graf_proracuna)
 
