@@ -53,7 +53,7 @@ Podatke sem uvozila v obliki CSV z Eurostata. Podatke imamo v treh razpredelnica
   - `STUDENTI_MEDICINE` - meritev: število študentov medicine na 100.000 prebivalcev (število),
   - `STUDENTI_ZDRAVSTVA` - meritev: število študentov zdravstva na 100.000 prebivalcev (besedilo).
   
-1. `zdravstveno_stanje` - podatki o zdravstvenem stanju iz leta 2014 za države Evrope
+1. `razvitost` - podatki o zdravstvenem stanju iz leta 2014 za države Evrope
   - `DRZAVA` - spremenljivka: ime države (neurejen faktor),
   - `LETO` - spremenljivka: leto, v katerem je bila meritev izvedena (število),
   - `BDP` - meritev: bruto domači proizvod v evrih na prebivalca (število)
