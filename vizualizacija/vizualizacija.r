@@ -21,7 +21,7 @@ skupaj.zdravniki <- inner_join(zivlj.doba, st.zdravnikov, by=c("DRZAVA"))
 graf_osebja <- ggplot(data=skupaj.zdravniki, mapping=aes(x=ZDRAVNIKI, y=ZIVLJENJSKA_DOBA, color=SPOL)) +
   geom_point() + xlab("število zdravnikov (na 100.000 preb.)") + ylab("pričakovana življenjska doba")
 
-print(graf_osebja)
+#print(graf_osebja)
 
 ### graf gibanja števila študentov v letih 2000-2017 v državah z največ in najmanj zdravniki
 
@@ -39,7 +39,7 @@ graf_studentov <- ggplot() +
   geom_line(data=najmanj.zdravnikov.tabela, mapping=aes(group=DRZAVA, x=LETO, y=STUDENTI_MEDICINE, color="green")) +
   xlab("leto") + ylab("število študentov medicine (na 100.000 preb.)")
 
-print(graf_studentov)
+#print(graf_studentov)
 
 ### graf umrljivosti otrok v odvisnosti od proračuna v letu 2017
 
@@ -52,7 +52,7 @@ skupaj.umrljivost <- inner_join(umrljivost.otrok, proracun.graf, by="DRZAVA")
 graf_umrljivosti <- ggplot(data=skupaj.umrljivost, mapping=aes(x=PRORACUN, y=SMRT_OTROK, color=SPOL)) +
   geom_point() + xlab("letni proračun (€/preb.)") + ylab("število umrlih otrok do 1 leta (na 100.000 preb.)")
 
-print(graf_umrljivosti)
+#print(graf_umrljivosti)
 
 ### gibanje proračuna za zdravstvo v obdobju 2000-2016 za države z najvišjim in najnižjim BDP-jem
 
@@ -72,7 +72,7 @@ graf_proracuna <- ggplot() +
   geom_line(data=najnizji.bdp.tabela, mapping=aes(group=DRZAVA, x=LETO, y=PRORACUN, color="green")) +
   xlab("leto") + ylab("letni proračun (€/preb.)")
 
-print(graf_proracuna)
+#print(graf_proracuna)
 
 
 # zemljevid
@@ -85,5 +85,5 @@ zemljevid <- uvozi.zemljevid("https://www.naturalearthdata.com/http//www.natural
 zemljevid <- filter(zemljevid, CONTINENT == "Europe", long < 55 & long > -45 & lat > 30 & lat < 75)
 
 ggplot() + geom_polygon(data=zemljevid, aes(x=long, y=lat, group=group, fill=id)) +
-  guides(fill=FALSE) + labs(title="Evropa - osnovna slika")
+  guides(fill=FALSE) + labs(title="Evropa")
 
