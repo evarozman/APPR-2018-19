@@ -69,17 +69,25 @@ Podatke sem uvozila v obliki CSV z Eurostata. Podatke imamo v treh razpredelnica
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 
+Prvi graf prikazuje pričakovano življenjsko dobo v odvisnosti od števila zdravnikov v posamezni državi. Pričakovali bi, da bo višja življenjska doba v državah, kjer je na voljo več zdravnikov, a lahko iz grafa vidimo, da ti dve meritvi med seboj nista vidno povezani.
+
 ```{r graf_osebja, echo=FALSE, message=FALSE, warning=FALSE}
 graf_osebja
 ```
+
+Naslednji graf prikazuje gibanje števila študentov medicine med letoma 2000 in 2017. Rdeče črte prikazujejo tri države z najmanšim številom, modre pa z največjim številom zdravnikov glede na število prebivalcev (iz leta 2016). Iz grafa je vidno, da izobražujejo države s "primankljajem" zdravnikov večje število študentov medicine, kot države, kjer je zdravnikov več. Lahko pa tudi vidimo, da v celoti število študentov medicine glede na celotno prebivalstvo narašča.
 
 ```{r graf_studentov, echo=FALSE, message=FALSE, warning=FALSE}
 graf_studentov
 ```
 
+Tretji graf prikazuje odvisnost proračuna, namenjenega za zdravstvo, in umrljivost otrok do enega leta starosti. Tudi tukaj trend ni povsem jasen, lahko pa bi rekli, da z višanjem letnega proračuna število smrti rahlo upada. 
+
 ```{r graf_umrljivosti, echo=FALSE, message=FALSE, warning=FALSE}
 graf_umrljivosti
 ```
+
+Zadnji graf prikazuje gibanje letnega proračuna, namenjenega za zdravstvo v letih 2010-2016. Rdeče črte prikazujejo tri države z najvišjim, modre pa z najnižjim BDP-jem. Kot vidimo, vlagajo bolje razvite države v zdravstvo precej več denarja kot slabše razvite. Prav tako se vidi, da proračun praviloma skozi leta narašča.
 
 ```{r graf_proracuna, echo=FALSE, message=FALSE, warning=FALSE}
 graf_proracuna
