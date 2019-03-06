@@ -35,9 +35,9 @@ najvec.zdravnikov.tabela <- zdravstvo[c("DRZAVA", "LETO", "STUDENTI_MEDICINE")] 
 najmanj.zdravnikov.tabela <- zdravstvo[c("DRZAVA", "LETO", "STUDENTI_MEDICINE")] %>% filter(DRZAVA %in% najmanj.zdravnikov)
 
 graf_studentov <- ggplot() +
-  geom_line(data=najvec.zdravnikov.tabela, mapping=aes(group=DRZAVA, x=LETO, y=STUDENTI_MEDICINE, colour="red")) +
-  geom_line(data=najmanj.zdravnikov.tabela, mapping=aes(group=DRZAVA, x=LETO, y=STUDENTI_MEDICINE, colour="green")) +
-  xlab("leto") + ylab("število študentov medicine (na 100.000 preb.)") + theme(legend.position="none")
+  geom_line(data=najvec.zdravnikov.tabela, mapping=aes(group=DRZAVA, x=LETO, y=STUDENTI_MEDICINE), colour="red") +
+  geom_line(data=najmanj.zdravnikov.tabela, mapping=aes(group=DRZAVA, x=LETO, y=STUDENTI_MEDICINE), colour="green") +
+  xlab("leto") + ylab("število študentov medicine (na 100.000 preb.)")
 
 #print(graf_studentov)
 
@@ -68,9 +68,9 @@ najvisji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZ
 najnizji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZAVA %in% najnizji.bdp) %>% filter(LETO>=2010)
 
 graf_proracuna <- ggplot() +
-  geom_line(data=najvisji.bdp.tabela, mapping=aes(group=DRZAVA, x=LETO, y=PRORACUN, colour="blue")) +
-  geom_line(data=najnizji.bdp.tabela, mapping=aes(group=DRZAVA, x=LETO, y=PRORACUN, colour="red")) +
-  xlab("leto") + ylab("letni proračun (€/preb.)") + theme(legend.position="none")
+  geom_line(data=najvisji.bdp.tabela, mapping=aes(group=DRZAVA, x=LETO, y=PRORACUN), colour="blue") +
+  geom_line(data=najnizji.bdp.tabela, mapping=aes(group=DRZAVA, x=LETO, y=PRORACUN), colour="red") +
+  xlab("leto") + ylab("letni proračun (€/preb.)")
 
 #print(graf_proracuna)
 
