@@ -11,6 +11,15 @@ library(munsell)
 
 # grafi
 
+### graf proračuna po državah Evropske unije za leto 2016
+
+proracun_2016 <- proracun %>% filter(LETO==2016) %>% filter(PRORACUN!=0)
+
+graf_proracuna_2016 <- ggplot(data=proracun_2016, aes(x=reorder(DRZAVA, PRORACUN), y=PRORACUN)) +
+  geom_bar(stat="identity") + coord_flip() + xlab("država") + ylab("proračun (€/preb.)")
+
+#print(graf_proracuna_2016)
+
 ### graf življenjske dobe v odvisnosti od števila zdravnikov
 
 zivlj.doba <- zdravstveno_stanje[c("DRZAVA", "SPOL", "ZIVLJENJSKA_DOBA")]
@@ -41,7 +50,7 @@ graf_studentov <- ggplot() +
 
 #print(graf_studentov)
 
-### graf umrljivosti otrok v odvisnosti od proračuna v letu 2017
+### graf umrljivosti otrok v odvisnosti od proračuna v letu 2014
 
 umrljivost.otrok <- zdravstveno_stanje[c("DRZAVA", "SPOL","SMRT_OTROK")]
 proracun.graf <- zdravstvo %>% filter(LETO==2014)
