@@ -48,7 +48,8 @@ najmanj.zdravnikov.tabela <- zdravstvo[c("DRZAVA", "LETO", "STUDENTI_MEDICINE")]
 graf_studentov <- ggplot() +
   geom_line(data=najvec.zdravnikov.tabela, mapping=aes(group=DRZAVA, x=LETO, y=STUDENTI_MEDICINE), colour="red") +
   geom_line(data=najmanj.zdravnikov.tabela, mapping=aes(group=DRZAVA, x=LETO, y=STUDENTI_MEDICINE), colour="green") +
-  xlab("leto") + ylab("število študentov medicine (na 100.000 preb.)")
+  labs(x="leto",y="število študentov medicine (na 100.000 preb.)", title="Število študentov medicine glede na \nštevilo zdravnikov v letih 2000-2017")
++ legend("topright", legend=c("največ zdravnikov", "najmanj zdravnikov"),lty=1, cex=1, col=c("red", "green"))
 
 print(graf_studentov)
 
@@ -80,10 +81,11 @@ najvisji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZ
 najnizji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZAVA %in% najnizji.bdp) %>% filter(LETO>=2010)
 
 graf_proracuna <- ggplot() +
-  geom_line(data=najvisji.bdp.tabela, mapping=aes(group=DRZAVA, x=LETO, y=PRORACUN), colour="blue") +
-  geom_line(data=najnizji.bdp.tabela, mapping=aes(group=DRZAVA, x=LETO, y=PRORACUN), colour="red") +
+  geom_line(data=najvisji.bdp.tabela, mapping=aes(group=DRZAVA, x=LETO, y=PRORACUN), col="blue") +
+  geom_line(data=najnizji.bdp.tabela, mapping=aes(group=DRZAVA, x=LETO, y=PRORACUN), col="red") +
   labs(x="leto", y="letni proračun (€/preb.)", 
-       title="Gibanje proračuna za zdravstvo v obdobju 2010-2016 za države z najvišjim in najnižjim BDP")
+       title="Gibanje proračuna za zdravstvo v obdobju 2010-2016 \n za države z najvišjim in najnižjim BDP")
+legend(2017,3000, legend=c("visok BDP", "nizek BDP"), col=c("blue", "red"), lwd=1, cex=0.8)
 
 print(graf_proracuna)
 
@@ -103,7 +105,7 @@ drzave <- unique(zemljevid_evrope$NAME)
 drzave <- as.data.frame(drzave, stringsAsFactors=FALSE) 
 names(drzave) <- "DRZAVA"
 
-postelje <- zdravstvo %>% filter(LETO==2016)
+postelje <- zdravstvo %>% filter(LETO==2013)
 postelje <- postelje[c("DRZAVA", "POSTELJE")]
 
 skupaj <- inner_join(drzave, postelje, by="DRZAVA")
@@ -114,7 +116,29 @@ zemljevid_postelj <- ggplot() + geom_polygon(data=inner_join(zemljevid_evrope, s
   theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(), axis.text.y=element_blank(),
         axis.ticks.y=element_blank()) +
   guides(fill=guide_colorbar(title="Število postelj")) +
-  ggtitle("Število postelj na 100.000 prebivalcev v letu 2016") +
+  ggtitle("Število postelj na 100.000 prebivalcev v letu 2013") +
+  labs(x = " ") +
+  labs(y = " ") +
+  scale_fill_gradient(low = "white", high = "violetred",
+                      space = "Lab", na.value = "#e0e0d1", guide = "black",
+                      aesthetics = "fill")
+
+drzave <- unique(zemljevid_evrope$NAME) 
+drzave <- as.data.frame(drzave, stringsAsFactors=FALSE) 
+names(drzave) <- "DRZAVA"
+
+ziv_doba <- zdravstveno_stanje %>% filter(SPOL=="m")
+ziv_doba <- ziv_doba[c("DRZAVA", "ZIVLJENJSKA_DOBA")]
+
+skupaj <- inner_join(drzave, ziv_doba, by="DRZAVA")
+
+zemljevid_zivlj_dobe <- ggplot() + geom_polygon(data=inner_join(zemljevid_evrope, skupaj, by=c("NAME"="DRZAVA")), 
+                                             aes(x=long, y=lat, group=group, fill=ZIVLJENJSKA_DOBA)) +
+  geom_line() +
+  theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(), axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  guides(fill=guide_colorbar(title="Življenjska doba")) +
+  ggtitle("Povprečna življenjska doba moških prebivalcev") +
   labs(x = " ") +
   labs(y = " ") +
   scale_fill_gradient(low = "white", high = "violetred",
