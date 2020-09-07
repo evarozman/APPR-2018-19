@@ -146,3 +146,13 @@ razvitost <- inner_join(razvitost, brezposelnost, by=c("LETO", "DRZAVA"))
 
 razvitost <- razvitost[c("DRZAVA", "LETO", "BDP", "DOHODEK", "BREZPOSELNI")]
 
+# življenjska doba za regresijo
+
+zivlj_doba_regresija <- read_csv("podatki/zivlj_doba_regresija.csv", na=c(":", " : "), locale=locale(encoding="Windows-1250"))
+zivlj_doba_regresija <- zivlj_doba_regresija %>% filter(sex == 'M')
+zivlj_doba_regresija <- zivlj_doba_regresija_m[, -c(1,2,3,4,5,9)]
+names(zivlj_doba_regresija) <- (c("DRZAVA", "LETO",'ZIVLJ_DOBA'))
+zivlj_doba_regresija$DRZAVA <- gsub("UK", "GB", zivlj_doba_regresija$DRZAVA)
+zivlj_doba_regresija$DRZAVA <- gsub("EL", "GR", zivlj_doba_regresija$DRZAVA)
+zivlj_doba_regresija <- zivlj_doba_regresija %>% filter(!DRZAVA == 'EU27_2020', !DRZAVA == 'EU28')
+zivlj_doba_regresija$DRZAVA <- countrycode(zivlj_doba_regresija$DRZAVA, origin = 'iso2c', destination = 'country.name')
