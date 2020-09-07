@@ -10,20 +10,17 @@ prorac_razv <- filter(zdravstvo, LETO == '2016')
 prorac_razv <- prorac_razv[c(1,3)]
 postelje_razv <- filter(zdravstvo, LETO == '2016')
 postelje_razv <- postelje_razv[c(1,4)]
-BDP_razv <- filter(razvitost, LETO == '2016')
-BDP_razv <- BDP_razv[c(1,3)]
 tabela_razvrscanje1 <- inner_join(zivlj_doba_razv, prorac_razv, by="DRZAVA")
 tabela_razvrscanje2 <- inner_join(tabela_razvrscanje1, postelje_razv, by="DRZAVA")
-tabela_razvrscanje3 <- inner_join(tabela_razvrscanje2, BDP_razv, by="DRZAVA")
-rownames(tabela_razvrscanje3) =  tabela_razvrscanje3$DRZAVA
-tabela_razvrscanje <- tabela_razvrscanje3[-c(1)]
+rownames(tabela_razvrscanje2) =  tabela_razvrscanje2$DRZAVA
+tabela_razvrscanje <- tabela_razvrscanje2[-c(1)]
 
-clustri <- kmeans(scale(tabela_razvrscanje), 4)
-tabela1 <- data.frame(DRZAVA = tabela_razvrscanje3$DRZAVA, DRZAVA = tabela_razvrscanje3$DRZAVA, 
-                      PRORACUN = tabela_razvrscanje3$PRORACUN, POSTELJE = tabela_razvrscanje3$POSTELJE, 
-                      BDP = tabela_razvrscanje3$BDP, SKUPINA = factor(clustri$cluster, ordered = TRUE))
+clustri_zdr <- kmeans(tabela_razvrscanje, 4)
+tabela1 <- data.frame(DRZAVA = tabela_razvrscanje2$DRZAVA, ZIVLJENJSKA_DOBA = tabela_razvrscanje2$ZIVLJENJSKA_DOBA,
+                      PRORACUN = tabela_razvrscanje2$PRORACUN, POSTELJE = tabela_razvrscanje2$POSTELJE, 
+                      SKUPINA = factor(clustri_zdr$cluster, ordered = TRUE))
 skupaj3 <- inner_join(drzave, tabela1, by="DRZAVA")
-zemljevid_cluster <- ggplot() + geom_polygon(data=inner_join(zemljevid_evrope, skupaj3, by=c("NAME"="DRZAVA")), 
+zemljevid_cluster_zdr <- ggplot() + geom_polygon(data=inner_join(zemljevid_evrope, skupaj3, by=c("NAME"="DRZAVA")), 
                                                 aes(x=long, y=lat, group=group, fill=SKUPINA)) +
   geom_line() + 
   theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(), axis.text.y=element_blank(),
@@ -32,9 +29,33 @@ zemljevid_cluster <- ggplot() + geom_polygon(data=inner_join(zemljevid_evrope, s
                     labels = c('1', '2', '3', '4')) +
   labs(x = " ") +
   labs(y = " ") +
-  ggtitle("Razvrstitev držav po po skupinah")
+  ggtitle("Razvrstitev držav v skupine glede na zdravstveno stanje")
 
-#print(zemljevid_cluster)
+print(zemljevid_cluster_zdr)
+
+
+tabela_razvitost <- data.frame(filter(razvitost, LETO == '2016'))
+tabela_razvitost$BREZPOSELNI <- -(tabela_razvitost$BREZPOSELNI)
+rownames(tabela_razvitost) =  tabela_razvitost$DRZAVA
+tabela_razvitost1 <- tabela_razvitost[-c(1,2)]
+
+clustri_razv <- kmeans(tabela_razvitost1, 4)
+tabela2 <- data.frame(DRZAVA = tabela_razvitost$DRZAVA, BDP = tabela_razvitost$BDP, 
+                      DOHODEK = tabela_razvitost$DOHODEK, BREZPOSELNI = tabela_razvitost$BREZPOSELNI,
+                      SKUPINA = factor(clustri_razv$cluster, ordered = TRUE))
+skupaj4 <- inner_join(drzave, tabela2, by="DRZAVA")
+zemljevid_cluster_razv <- ggplot() + geom_polygon(data=inner_join(zemljevid_evrope, skupaj4, by=c("NAME"="DRZAVA")), 
+                                             aes(x=long, y=lat, group=group, fill=SKUPINA)) +
+  geom_line() + 
+  theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(), axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  scale_fill_manual(values = c('yellow', 'orange', 'orangered', 'red3'),
+                    labels = c('1', '2', '3', '4')) +
+  labs(x = " ") +
+  labs(y = " ") +
+  ggtitle("Razvrstitev držav v skupine glede na razvitost")
+
+print(zemljevid_cluster_razv)
 
 # regresija življenjske dobe
 
@@ -52,4 +73,4 @@ graf_regresija <- ggplot(zivlj_doba_evropa, aes(x=LETO, y=POVPRECJE)) +
   geom_point() +
   labs(title='Napoved življenjske dobe za države Evropske unije', y="ŽIVLJENJSKA DOBA")
 
-#print(graf_regresija)
+print(graf_regresija)

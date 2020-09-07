@@ -25,7 +25,7 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 # Izbira teme
 
-V projektu bom analizirala zdravstveno stanje in zdravstvo držav v Evropi in ju primerjala z razvitostjo teh držav.
+V projektu bom analizirala zdravstveno stanje in zdravstvo držav v Evropski Uniji in ju primerjala z razvitostjo teh držav.
 
 # Obdelava, uvoz in čiščenje podatkov
 
@@ -75,7 +75,7 @@ Prvi graf prikazuje pričakovano življenjsko dobo v odvisnosti od števila zdra
 graf_osebja
 ```
 
-Naslednji graf prikazuje gibanje števila študentov medicine med letoma 2000 in 2017. Rdeče črte prikazujejo tri države z najmanšim številom, modre pa z največjim številom zdravnikov glede na število prebivalcev (iz leta 2016). Iz grafa je vidno, da izobražujejo države s "primankljajem" zdravnikov večje število študentov medicine, kot države, kjer je zdravnikov več. Lahko pa tudi vidimo, da v celoti število študentov medicine glede na celotno prebivalstvo narašča.
+Naslednji graf prikazuje gibanje števila študentov medicine med letoma 2000 in 2017. Rdeče črte prikazujejo tri države z najmanšim številom, modre pa z največjim številom zdravnikov glede na število prebivalcev (iz leta 2016). Iz grafa je vidno, da izobražujejo države s "primanjkljajem" zdravnikov večje število študentov medicine, kot države, kjer je zdravnikov več. Lahko pa tudi vidimo, da v celoti število študentov medicine glede na celotno prebivalstvo narašča.
 
 ```{r graf_studentov, echo=FALSE, message=FALSE, warning=FALSE}
 graf_studentov
@@ -93,12 +93,36 @@ Zadnji graf prikazuje gibanje letnega proračuna, namenjenega za zdravstvo v let
 graf_proracuna
 ```
 
+Na zemljevidih vidimo število bolnišničnih postelj na sto tisoč prebivalcev in pričakovano življenjsko dobo. Vidimo, da je pričakovana življenjska doba v državah vzhodne Evrope nižja od preostalih delov Evrope, in to kljub temu, da imajo glede na ostale evropske države dokaj visoko število bolnišničnih postelj. Ravno nasprotno imajo recimo Španija, Italija in Velika Britanija precej nizko število postelj na prebivalca, a so kljub temu med državami z višjimi pričakovanimi življenjskimi dobami. Čeprav izgleda, da je povezava med tema dvema spremeljivkama negativna, se mi zdi bolj verjetno, da povezave med njima sploh ni.
+
+```{r zemljevid_postelj, echo=FALSE, message=FALSE, warning=FALSE}
+zemljevid_postelj
+```
+```{r zemljevid_zivlj_doba, echo=FALSE, message=FALSE, warning=FALSE}
+zemljevid_zivlj_doba
+```
+
 ***
 
 # Napredna analiza podatkov
 
 ```{r analiza, echo=FALSE, message=FALSE}
 # source("analiza/analiza.r", encoding="UTF-8")
+```
+
+Na prvem zemljevidu so države razdeljene v skupine glede na pričakovano življenjsko dobo, proračun, namenjen zdravstvu in število postelj v zdravstvenih ustanovah, na drugem pa glede na BDP, dohodek in število brezposelnih ljudi. Vidimo lahko, da je vzhodna Evropa, ki ima nižji BDP in dohodek ter višji odstotek nezaposlenih tudi po zdravstvenem stanju uvrščena v nižje skupine. Po drugi strani lahko v srednji in zahodni Evropi opazimo višjo splošno razvitost in boljše zdravstveno stanje.
+
+```{r zemljevid_cluster, echo=FALSE, message=FALSE, warning=FALSE}
+zemljevid_cluster
+```
+```{r zemljevid_cluster_razv, echo=FALSE, message=FALSE, warning=FALSE}
+zemljevid_cluster_razv
+```
+
+Na koncu vidimo še regresijsko premico pričakovane življenjske dobe. Pričakovana življenjska doba od leta 2010 skoraj linearno narašča, zato je tak trend mogoče pričakovati tudi v prihajajočih letih. V 25 letih bi naj pričakovana življenjska doba narastla za skoraj 3 leta.
+
+```{r graf_regresija, echo=FALSE, message=FALSE, warning=FALSE}
+graf_regresija
 ```
 
 ***
