@@ -95,10 +95,10 @@ graf_proracuna
 
 Na zemljevidih vidimo število bolnišničnih postelj na sto tisoč prebivalcev in pričakovano življenjsko dobo. Vidimo, da je pričakovana življenjska doba v državah vzhodne Evrope nižja od preostalih delov Evrope, in to kljub temu, da imajo glede na ostale evropske države dokaj visoko število bolnišničnih postelj. Ravno nasprotno imajo recimo Španija, Italija in Velika Britanija precej nizko število postelj na prebivalca, a so kljub temu med državami z višjimi pričakovanimi življenjskimi dobami. Čeprav izgleda, da je povezava med tema dvema spremeljivkama negativna, se mi zdi bolj verjetno, da povezave med njima sploh ni.
 
-```{r zemljevid_postelj, echo=FALSE, message=FALSE, warning=FALSE}
+```{r zemljevid_postelj, echo=FALSE, fig.align='center', fig.cap='Zemljevid števila postelj na 100.000 prebivalcev'}
 zemljevid_postelj
 ```
-```{r zemljevid_zivlj_doba, echo=FALSE, message=FALSE, warning=FALSE}
+```{r zemljevid_zivlj_doba, echo=FALSE, fig.align='center', fig.cap='Zemljevid pričakovane življenjske dobe ob rojstvu'}
 zemljevid_zivlj_doba
 ```
 
@@ -112,10 +112,10 @@ zemljevid_zivlj_doba
 
 Na prvem zemljevidu so države razdeljene v skupine glede na pričakovano življenjsko dobo, proračun, namenjen zdravstvu in število postelj v zdravstvenih ustanovah, na drugem pa glede na BDP, dohodek in število brezposelnih ljudi. Vidimo lahko, da je vzhodna Evropa, ki ima nižji BDP in dohodek ter višji odstotek nezaposlenih tudi po zdravstvenem stanju uvrščena v nižje skupine. Po drugi strani lahko v srednji in zahodni Evropi opazimo višjo splošno razvitost in boljše zdravstveno stanje.
 
-```{r zemljevid_cluster, echo=FALSE, message=FALSE, warning=FALSE}
-zemljevid_cluster
+```{r zemljevid_cluster_zdr, echo=FALSE, fig.align='center', fig.cap='Razvrstitev držav v skupine glede na zdravstveno stanje'}
+zemljevid_cluster_zdr
 ```
-```{r zemljevid_cluster_razv, echo=FALSE, message=FALSE, warning=FALSE}
+```{r zemljevid_cluster_razv, echo=FALSE, fig.align='center', fig.cap='Razvrstitev držav v skupine glede na razvitost'}
 zemljevid_cluster_razv
 ```
 
