@@ -36,21 +36,19 @@ graf_osebja <- ggplot(data=skupaj.zdravniki, mapping=aes(x=ZDRAVNIKI, y=ZIVLJENJ
 
 ### graf gibanja števila študentov v letih 2000-2017 v državah z največ in najmanj zdravniki
 
-najvec.zdravnikov <- zdravstvo %>% filter(LETO==2016) %>% filter(STUDENTI_MEDICINE!=0) %>% top_n(3, ZDRAVNIKI)
-najvec.zdravnikov <- c(najvec.zdravnikov$DRZAVA)
+najvec.zdravnikov <- zdravstvo %>% filter(LETO == 2016) %>% filter(STUDENTI_MEDICINE != 0) %>%
+  top_n(3, ZDRAVNIKI) %>% arrange(-ZDRAVNIKI) %>% .$DRZAVA
+najmanj.zdravnikov <- zdravstvo %>% filter(LETO == 2016) %>% filter(STUDENTI_MEDICINE != 0) %>%
+  top_n(3, (-1)*ZDRAVNIKI) %>% arrange(-ZDRAVNIKI) %>% .$DRZAVA
+najvec.najmanj.zdravnikov <- c(najvec.zdravnikov, najmanj.zdravnikov)
 
-najmanj.zdravnikov <- zdravstvo %>% filter(LETO==2016) %>% filter(STUDENTI_MEDICINE!=0) %>% top_n(3, (-1)*ZDRAVNIKI)
-najmanj.zdravnikov <- c(najmanj.zdravnikov$DRZAVA)
-
-najvec.zdravnikov.tabela <- zdravstvo[c("DRZAVA", "LETO", "STUDENTI_MEDICINE")] %>% filter(DRZAVA %in% najvec.zdravnikov)
-najmanj.zdravnikov.tabela <- zdravstvo[c("DRZAVA", "LETO", "STUDENTI_MEDICINE")] %>% filter(DRZAVA %in% najmanj.zdravnikov)
-
-graf_studentov <- ggplot() +
-  geom_line(data=najvec.zdravnikov.tabela, mapping=aes(group=DRZAVA, x=LETO, y=STUDENTI_MEDICINE), colour="red") +
-  geom_line(data=najmanj.zdravnikov.tabela, mapping=aes(group=DRZAVA, x=LETO, y=STUDENTI_MEDICINE), colour="green") +
-  labs(x="leto",y="število študentov medicine (na 100.000 preb.)", title="Število študentov medicine glede na \nštevilo zdravnikov v letih 2000-2017") + 
-  legend("topright", legend=c("največ zdravnikov", "najmanj zdravnikov"),lty=1, cex=1, col=c("red", "green"))
-
+graf_studentov <- ggplot(zdravstvo %>% filter(DRZAVA %in% najvec.najmanj.zdravnikov),
+                         aes(color=DRZAVA, x=LETO, y=STUDENTI_MEDICINE)) + geom_line() +
+  labs(x="leto", y="število študentov medicine \n(na 100.000 preb.)",
+       title="Število študentov medicine glede na \nštevilo zdravnikov v letih 2000-2017") +
+  scale_color_manual(name="Država", breaks=najvec.najmanj.zdravnikov,
+                     values=c(setNames(RColorBrewer::brewer.pal(4, "Reds")[1:3], rev(najvec.zdravnikov)),
+                              setNames(RColorBrewer::brewer.pal(4, "Greens")[2:4], najmanj.zdravnikov)))
 #print(graf_studentov)
 
 ### graf umrljivosti otrok v odvisnosti od proračuna v letu 2014
@@ -71,22 +69,19 @@ graf_umrljivosti <- ggplot(data=skupaj.umrljivost, mapping=aes(x=PRORACUN, y=SMR
 
 skupaj <- inner_join(zdravstvo, razvitost, by=c("DRZAVA", "LETO"))
 
-najvisji.bdp <- skupaj %>% filter(LETO==2016) %>% top_n(3, BDP)
-najvisji.bdp <- c(najvisji.bdp$DRZAVA)
+najvisji.bdp <- skupaj %>% filter(LETO == 2016) %>% filter(PRORACUN != 0) %>%
+  top_n(3, BDP) %>% arrange(-BDP) %>% .$DRZAVA
+najnizji.bdp <- skupaj %>% filter(LETO == 2016) %>% filter(PRORACUN != 0) %>%
+  top_n(3, (-1)*BDP) %>% arrange(-BDP) %>% .$DRZAVA
+najvisji.najnizji.bdp <- c(najvisji.bdp, najnizji.bdp)
 
-najnizji.bdp <- skupaj %>% filter(LETO==2016) %>% top_n(3, (-1)*BDP)
-najnizji.bdp <- c(najnizji.bdp$DRZAVA)
-
-najvisji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZAVA %in% najvisji.bdp) %>% filter(LETO>=2010)
-najnizji.bdp.tabela <- zdravstvo[c("DRZAVA", "LETO", "PRORACUN")] %>% filter(DRZAVA %in% najnizji.bdp) %>% filter(LETO>=2010)
-
-
-graf_proracuna <- ggplot() +
-  geom_line(data=najvisji.bdp.tabela, mapping=aes(group=DRZAVA, x=LETO, y=PRORACUN), col="blue") +
-  geom_line(data=najnizji.bdp.tabela, mapping=aes(group=DRZAVA, x=LETO, y=PRORACUN), col="red") +
-  labs(x="leto", y="letni proračun (€/preb.)", 
-       title="Gibanje proračuna za zdravstvo v obdobju 2010-2016 \n za države z najvišjim in najnižjim BDP")
-legend(2017,3000, legend=c("visok BDP", "nizek BDP"), lwd=1, cex=0.8, col=c("blue", "red"))
+graf_proracuna <- ggplot(skupaj %>% filter(DRZAVA %in% najvisji.najnizji.bdp) %>% filter(LETO>2010),
+                         aes(color=DRZAVA, x=LETO, y=PRORACUN)) + geom_line() +
+  labs(x="leto", y="Letni proračun za zdravstvo \nna prebivalca (v €)",
+       title="Letni proračun namenjen zdravstvu glede na BDP držav v letih 2010-2016") +
+  scale_color_manual(name="Država", breaks=najvisji.najnizji.bdp,
+                     values=c(setNames(RColorBrewer::brewer.pal(4, "Reds")[1:3], rev(najvisji.bdp)),
+                              setNames(RColorBrewer::brewer.pal(4, "Greens")[2:4], najnizji.bdp)))
 
 #print(graf_proracuna)
 
@@ -109,9 +104,9 @@ names(drzave) <- "DRZAVA"
 postelje <- zdravstvo %>% filter(LETO==2016)
 postelje <- postelje[c("DRZAVA", "POSTELJE")]
 
-skupaj1 <- inner_join(drzave, postelje, by="DRZAVA")
+skupaj1 <- left_join(drzave, postelje, by="DRZAVA")
 
-zemljevid_postelj <- ggplot() + geom_polygon(data=inner_join(zemljevid_evrope, skupaj1, by=c("NAME"="DRZAVA")), 
+zemljevid_postelj <- ggplot() + geom_polygon(data=left_join(zemljevid_evrope, skupaj1, by=c("NAME"="DRZAVA")), 
                                                    aes(x=long, y=lat, group=group, fill=POSTELJE)) +
   theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(), axis.text.y=element_blank(),
         axis.ticks.y=element_blank()) +
@@ -122,14 +117,14 @@ zemljevid_postelj <- ggplot() + geom_polygon(data=inner_join(zemljevid_evrope, s
   scale_fill_gradient(low = "white", high = "violetred",
                       space = "Lab", na.value = "#e0e0d1", guide = "black",
                       aesthetics = "fill")
-print(zemljevid_postelj)
+#print(zemljevid_postelj)
 
 ziv_doba <- zdravstveno_stanje %>% filter(SPOL=="m")
 ziv_doba <- ziv_doba[c("DRZAVA", "ZIVLJENJSKA_DOBA")]
 
-skupaj2 <- inner_join(drzave, ziv_doba, by="DRZAVA")
+skupaj2 <- left_join(drzave, ziv_doba, by="DRZAVA")
 
-zemljevid_zivlj_dobe <- ggplot() + geom_polygon(data=inner_join(zemljevid_evrope, skupaj2, by=c("NAME"="DRZAVA")), 
+zemljevid_zivlj_dobe <- ggplot() + geom_polygon(data=left_join(zemljevid_evrope, skupaj2, by=c("NAME"="DRZAVA")), 
                                              aes(x=long, y=lat, group=group, fill=ZIVLJENJSKA_DOBA)) +
   theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(), axis.text.y=element_blank(),
         axis.ticks.y=element_blank()) +
@@ -140,4 +135,4 @@ zemljevid_zivlj_dobe <- ggplot() + geom_polygon(data=inner_join(zemljevid_evrope
   scale_fill_gradient(low = "white", high = "violetred",
                       space = "Lab", na.value = "#e0e0d1", guide = "black",
                       aesthetics = "fill")
-print(zemljevid_zivlj_dobe)
+#print(zemljevid_zivlj_dobe)
