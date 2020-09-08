@@ -78,7 +78,7 @@ najvisji.najnizji.bdp <- c(najvisji.bdp, najnizji.bdp)
 graf_proracuna <- ggplot(skupaj %>% filter(DRZAVA %in% najvisji.najnizji.bdp) %>% filter(LETO>2010),
                          aes(color=DRZAVA, x=LETO, y=PRORACUN)) + geom_line() +
   labs(x="leto", y="Letni proračun za zdravstvo \nna prebivalca (v €)",
-       title="Letni proračun namenjen zdravstvu glede na BDP držav v letih 2010-2016") +
+       title="Letni proračun namenjen zdravstvu glede \nna BDP držav v letih 2010-2016") +
   scale_color_manual(name="Država", breaks=najvisji.najnizji.bdp,
                      values=c(setNames(RColorBrewer::brewer.pal(4, "Reds")[1:3], rev(najvisji.bdp)),
                               setNames(RColorBrewer::brewer.pal(4, "Greens")[2:4], najnizji.bdp)))
