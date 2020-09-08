@@ -18,7 +18,7 @@ output:
 source("lib/libraries.r", encoding="UTF-8")
 ```
 
-```{r rstudio, echo=FALSE, results='asis'}
+```{r rstudio, echo=FALSE, warning=FALSE, results='asis'}
 # Izris povezave do RStudia na Binderju
 source("lib/rstudio.r", encoding="UTF-8")
 ```
@@ -29,7 +29,7 @@ V projektu bom analizirala zdravstveno stanje in zdravstvo držav v Evropski Uni
 
 # Obdelava, uvoz in čiščenje podatkov
 
-```{r uvoz, echo=FALSE, message=FALSE}
+```{r uvoz, echo=FALSE, warning=FALSE, message=FALSE}
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
 
@@ -95,10 +95,10 @@ graf_proracuna
 
 Na zemljevidih vidimo število bolnišničnih postelj na sto tisoč prebivalcev in pričakovano življenjsko dobo. Vidimo, da je pričakovana življenjska doba v državah vzhodne Evrope nižja od preostalih delov Evrope, in to kljub temu, da imajo glede na ostale evropske države dokaj visoko število bolnišničnih postelj. Ravno nasprotno imajo recimo Španija, Italija in Velika Britanija precej nizko število postelj na prebivalca, a so kljub temu med državami z višjimi pričakovanimi življenjskimi dobami. Čeprav izgleda, da je povezava med tema dvema spremeljivkama negativna, se zdi verjetneje, da povezave med njima sploh ni.
 
-```{r zemljevid_postelj, echo=FALSE, fig.align='center'}
+```{r zemljevid_postelj, warning=FALSE, echo=FALSE, fig.align='center'}
 zemljevid_postelj
 ```
-```{r zemljevid_zivlj_dobe, echo=FALSE, fig.align='center'}
+```{r zemljevid_zivlj_dobe, warning=FALSE, echo=FALSE, fig.align='center'}
 zemljevid_zivlj_dobe
 ```
 
@@ -106,16 +106,16 @@ zemljevid_zivlj_dobe
 
 # Napredna analiza podatkov
 
-```{r analiza, echo=FALSE, message=FALSE, fig.align='center'}
+```{r analiza, echo=FALSE, warning=FALSE, message=FALSE, fig.align='center'}
 source("analiza/analiza.r", encoding="UTF-8")
 ```
 
 Na prvem zemljevidu so države razdeljene v skupine glede na pričakovano življenjsko dobo, proračun, namenjen zdravstvu in število postelj v zdravstvenih ustanovah, na drugem pa glede na BDP, dohodek in število brezposelnih ljudi. Vidimo lahko, da je vzhodna Evropa, ki ima nižji BDP in dohodek ter višji odstotek nezaposlenih tudi po zdravstvenem stanju uvrščena v nižje skupine. Po drugi strani lahko v srednji in zahodni Evropi opazimo višjo splošno razvitost in boljše zdravstveno stanje.
 
-```{r zemljevid_cluster_zdr, echo=FALSE, fig.align='center'}
+```{r zemljevid_cluster_zdr, warning=FALSE, echo=FALSE, fig.align='center'}
 zemljevid_cluster_zdr
 ```
-```{r zemljevid_cluster_razv, echo=FALSE, fig.align='center'}
+```{r zemljevid_cluster_razv, warning=FALSE, echo=FALSE, fig.align='center'}
 zemljevid_cluster_razv
 ```
 

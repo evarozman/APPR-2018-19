@@ -26,7 +26,7 @@ zemljevid_cluster_zdr <- ggplot() + geom_polygon(data=left_join(zemljevid_evrope
   theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(), axis.text.y=element_blank(),
         axis.ticks.y=element_blank()) +
   scale_fill_manual(values = c('yellow', 'orange', 'orangered', 'red3'),
-                    labels = c('1', '2', '3', '4')) +
+                    labels = c('1', '2', '3', '4'), na.value="grey") +
   labs(x = " ") +
   labs(y = " ") +
   ggtitle("Razvrstitev držav v skupine glede na zdravstveno stanje")
@@ -51,7 +51,7 @@ zemljevid_cluster_razv <- ggplot() + geom_polygon(data=left_join(zemljevid_evrop
   theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(), axis.text.y=element_blank(),
         axis.ticks.y=element_blank()) +
   scale_fill_manual(values = c('yellow', 'orange', 'orangered', 'red3'),
-                    labels = c('1', '2', '3', '4')) +
+                    labels = c('1', '2', '3', '4'), na.value="grey") +
   labs(x = " ") +
   labs(y = " ") +
   ggtitle("Razvrstitev držav v skupine glede na razvitost")
