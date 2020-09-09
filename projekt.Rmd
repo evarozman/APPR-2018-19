@@ -110,7 +110,8 @@ zemljevid_zivlj_dobe
 source("analiza/analiza.r", encoding="UTF-8")
 ```
 
-Na prvem zemljevidu so države razdeljene v skupine glede na pričakovano življenjsko dobo, proračun, namenjen zdravstvu in število postelj v zdravstvenih ustanovah, na drugem pa glede na BDP, dohodek in število brezposelnih ljudi. Vidimo lahko, da je vzhodna Evropa, ki ima nižji BDP in dohodek ter višji odstotek nezaposlenih tudi po zdravstvenem stanju uvrščena v nižje skupine. Po drugi strani lahko v srednji in zahodni Evropi opazimo višjo splošno razvitost in boljše zdravstveno stanje.
+Na prvem zemljevidu so države razdeljene v skupine glede na pričakovano življenjsko dobo, proračun, namenjen zdravstvu in število postelj v zdravstvenih ustanovah, na drugem pa glede na BDP, dohodek in število brezposelnih ljudi. Vidimo lahko, da srednja in severna Evropa prednjačita v gospodarski moči, tam lahko opazimo tudi boljše zdravstveno stanje. Države južne in vzhodne Evrope, na drugi strani, pa z nekoliko slabšim gospodarstvom tudi manj vlagajo v zdravstvo.
+
 
 ```{r zemljevid_cluster_zdr, warning=FALSE, echo=FALSE, fig.align='center'}
 zemljevid_cluster_zdr

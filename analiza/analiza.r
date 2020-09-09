@@ -15,7 +15,8 @@ tabela_razvrscanje2 <- inner_join(tabela_razvrscanje1, postelje_razv, by="DRZAVA
 rownames(tabela_razvrscanje2) =  tabela_razvrscanje2$DRZAVA
 tabela_razvrscanje <- tabela_razvrscanje2[-c(1)]
 
-clustri_zdr <- kmeans(scale(tabela_razvrscanje), 4)
+set.seed(1000)
+clustri_zdr <- kmeans(scale(tabela_razvrscanje), 4, nstart=100)
 tabela1 <- data.frame(DRZAVA = tabela_razvrscanje2$DRZAVA, ZIVLJENJSKA_DOBA = tabela_razvrscanje2$ZIVLJENJSKA_DOBA,
                       PRORACUN = tabela_razvrscanje2$PRORACUN, POSTELJE = tabela_razvrscanje2$POSTELJE, 
                       SKUPINA = factor(clustri_zdr$cluster, ordered = TRUE))
@@ -40,7 +41,8 @@ rownames(tabela_razvitost) =  tabela_razvitost$DRZAVA
 tabela_razvitost <- na.omit(tabela_razvitost)[-c(2)]
 tabela_razvitost1 <- tabela_razvitost[-c(1)]
 
-clustri_razv <- kmeans(scale(tabela_razvitost1), 4)
+set.seed(1000)
+clustri_razv <- kmeans(scale(tabela_razvitost1), 4, nstart=100)
 tabela2 <- data.frame(DRZAVA = tabela_razvitost$DRZAVA, BDP = tabela_razvitost$BDP, 
                       DOHODEK = tabela_razvitost$DOHODEK, BREZPOSELNI = tabela_razvitost$BREZPOSELNI,
                       SKUPINA = factor(clustri_razv$cluster, ordered = TRUE))
