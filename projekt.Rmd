@@ -25,7 +25,7 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 # Izbira teme
 
-V projektu bom analizirala zdravstveno stanje in zdravstvo držav v Evropski Uniji in ju primerjala z razvitostjo teh držav.
+V projektu bom analizirala zdravstveno stanje in zdravstvo držav v Evropski Uniji in ju primerjala z gospodarsko razvitostjo teh držav.
 
 # Obdelava, uvoz in čiščenje podatkov
 
@@ -35,14 +35,14 @@ source("uvoz/uvoz.r", encoding="UTF-8")
 
 Podatke sem uvozila v obliki CSV z Eurostata. Podatke imamo v treh razpredelnicah v obliki *tidy data*.
 
-1. `zdravstveno_stanje` - podatki o zdravstvenem stanju iz leta 2014 za države Evrope
+1. `zdravstveno_stanje` - podatki o zdravstvenem stanju iz leta 2014 za države Evropske Unije
   - `DRZAVA` - spremenljivka: ime države (neurejen faktor),
   - `SPOL` - spremenljivka: spol osebe (neurejen faktor),
   - `ZIVLJENJSKA_DOBA` - meritev: pričakovana življenjska doba osebe ob rojstvu (število)
   - `ZDRAVA_LETA` - meritev: pričakovano število zdravih let ob rojstvu (število)
   - `SMRT_OTROK` - meritev: število umrlih otrok do prvega leta starosti na 100.000 prebivalcev (število)
 
-2. `zdravstvo` - podatki o zdravstvu za države Evrope
+2. `zdravstvo` - podatki o zdravstvu za države Evropske Unije
   - `DRZAVA` - spremenljivka: ime države (neurejen faktor),
   - `LETO` - spremenljivka: leto, v katerem je bila meritev izvedena (število),
   - `PRORACUN` - meritev: letni proračun v evrih na prebivalca (število),
@@ -53,7 +53,7 @@ Podatke sem uvozila v obliki CSV z Eurostata. Podatke imamo v treh razpredelnica
   - `STUDENTI_MEDICINE` - meritev: število študentov medicine na 100.000 prebivalcev (število),
   - `STUDENTI_ZDRAVSTVA` - meritev: število študentov zdravstva na 100.000 prebivalcev (besedilo).
   
-1. `razvitost` - podatki o zdravstvenem stanju iz leta 2014 za države Evrope
+1. `razvitost` - podatki o gospodarski razvitosti držav Evropske Unije
   - `DRZAVA` - spremenljivka: ime države (neurejen faktor),
   - `LETO` - spremenljivka: leto, v katerem je bila meritev izvedena (število),
   - `BDP` - meritev: bruto domači proizvod v evrih na prebivalca (število)
@@ -87,7 +87,7 @@ Tretji graf prikazuje odvisnost proračuna, namenjenega za zdravstvo, in umrljiv
 graf_umrljivosti
 ```
 
-Zadnji graf prikazuje gibanje letnega proračuna, namenjenega za zdravstvo v letih 2010-2016. Rdeče črte prikazujejo tri države z najvišjim, zelene pa z najnižjim BDP-jem. Kot vidimo, vlagajo bolje razvite države v zdravstvo precej več denarja kot slabše razvite. Prav tako se vidi, da proračun namenjen zdravstvu v državah z višjim BDP-jem nekoliko narašča, medtem ko v državah z nižjim BDP-jem vsako leto za zdravstvo porabijo približno enako sredstev.
+Zadnji graf prikazuje gibanje letnega proračuna, namenjenega za zdravstvo v letih 2010-2016. Rdeče črte prikazujejo tri države z najvišjim, zelene pa z najnižjim BDP-jem v Evropi. Kot vidimo, vlagajo bolje razvite države v zdravstvo precej več denarja kot slabše razvite. Prav tako se vidi, da proračun namenjen zdravstvu v državah z višjim BDP-jem nekoliko narašča, medtem ko v državah z nižjim BDP-jem vsako leto za zdravstvo porabijo približno enako sredstev.
 
 ```{r graf_proracuna, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
 graf_proracuna

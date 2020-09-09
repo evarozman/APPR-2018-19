@@ -56,7 +56,7 @@ zemljevid_cluster_razv <- ggplot() + geom_polygon(data=left_join(zemljevid_evrop
                     labels = c('1', '2', '3', '4'), na.value="grey") +
   labs(x = " ") +
   labs(y = " ") +
-  ggtitle("Razvrstitev držav v skupine glede na razvitost")
+  ggtitle("Razvrstitev držav v skupine glede na gospodarsko razvitost")
 
 #print(zemljevid_cluster_razv)
 
