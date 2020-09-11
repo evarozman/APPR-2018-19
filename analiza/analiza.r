@@ -62,13 +62,11 @@ zemljevid_cluster_razv <- ggplot() + geom_polygon(data=left_join(zemljevid_evrop
 
 # regresija življenjske dobe
 
-y <- group_by(zivlj_doba_regresija, LETO)
-zivlj_doba_evropa <- summarise(y, POVPRECJE=mean(ZIVLJ_DOBA))
+zivlj_doba_evropa <- group_by(zivlj_doba_regresija, LETO) %>% summarise(POVPRECJE=mean(ZIVLJ_DOBA))
 
 prileganje <- lm(data = zivlj_doba_evropa, POVPRECJE ~ LETO)
 
-z <- data.frame(LETO=seq(2019, 2025, 1))
-napoved <- mutate(z, POVPRECJE=predict(prileganje, z))
+napoved <- data.frame(LETO=seq(2019, 2025, 1)) %>% mutate(POVPRECJE=predict(prileganje, z))
 
 graf_regresija <- ggplot(zivlj_doba_evropa, aes(x=LETO, y=POVPRECJE)) +
   geom_smooth(method=lm, fullrange = TRUE, color = 'blue') +

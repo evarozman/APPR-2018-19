@@ -110,7 +110,7 @@ zemljevid_zivlj_dobe
 source("analiza/analiza.r", encoding="UTF-8")
 ```
 
-Na prvem zemljevidu so države razdeljene v skupine glede na pričakovano življenjsko dobo, proračun, namenjen zdravstvu in število postelj v zdravstvenih ustanovah, na drugem pa glede na BDP, dohodek in število brezposelnih ljudi. Vidimo lahko, da srednja in severna Evropa prednjačita v gospodarski moči, tam lahko opazimo tudi boljše zdravstveno stanje. Države južne in vzhodne Evrope, na drugi strani, pa z nekoliko slabšim gospodarstvom tudi manj vlagajo v zdravstvo.
+Na prvem zemljevidu so države razdeljene v skupine glede na pričakovano življenjsko dobo, proračun, namenjen zdravstvu in število postelj v zdravstvenih ustanovah, na drugem pa glede na BDP, dohodek in število brezposelnih ljudi. Vidimo lahko, da skupine tako gospodarske razvitosti kot tudi zdravstva sovpadajo z geografsko lego držav. Srednja in severna Evropa prednjačita v gospodarski moči, tam lahko opazimo tudi boljše zdravstveno stanje, države južne in vzhodne Evrope, na drugi strani, pa z nekoliko slabšim gospodarstvom tudi manj vlagajo v zdravstvo.
 
 
 ```{r zemljevid_cluster_zdr, warning=FALSE, echo=FALSE, fig.align='center'}
@@ -120,7 +120,7 @@ zemljevid_cluster_zdr
 zemljevid_cluster_razv
 ```
 
-Na koncu vidimo še regresijsko premico pričakovane življenjske dobe. Pričakovana življenjska doba od leta 2010 skoraj linearno narašča, zato je tak trend mogoče pričakovati tudi v prihajajočih letih. V 25 letih bi naj pričakovana življenjska doba narastla za skoraj 3 leta.
+Na koncu vidimo še regresijsko premico pričakovane življenjske dobe. Pričakovana življenjska doba od leta 2010 skoraj linearno narašča, zato je tak trend mogoče pričakovati tudi v prihajajočih letih. V naslednjih petih letih bi naj pričakovana življenjska doba narastla za eno leto.
 
 ```{r graf_regresija, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
 graf_regresija
