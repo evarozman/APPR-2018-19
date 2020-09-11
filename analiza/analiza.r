@@ -66,7 +66,7 @@ zivlj_doba_evropa <- group_by(zivlj_doba_regresija, LETO) %>% summarise(POVPRECJ
 
 prileganje <- lm(data = zivlj_doba_evropa, POVPRECJE ~ LETO)
 
-napoved <- data.frame(LETO=seq(2019, 2025, 1)) %>% mutate(POVPRECJE=predict(prileganje, z))
+napoved <- data.frame(LETO=seq(2019, 2025, 1)) %>% mutate(POVPRECJE=predict(prileganje, data.frame(LETO=seq(2019, 2025, 1))))
 
 graf_regresija <- ggplot(zivlj_doba_evropa, aes(x=LETO, y=POVPRECJE)) +
   geom_smooth(method=lm, fullrange = TRUE, color = 'blue') +
